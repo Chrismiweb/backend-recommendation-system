@@ -22,6 +22,7 @@ app.get('/', (req, res)=>(
     
 ))
 
+
  app.listen(port, async()=>{
     console.log(`server is running on port ${port}`);
     await connectDb(`database is currently running on ${port}`)

@@ -8,6 +8,10 @@ const cors = require('cors')
 
 const port = process.env.PORT || 1050;
 
+const corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
 const limiter = rateLimit({
 	windowMs: 24 * 60 * 60 * 1000, // 24 hours
@@ -18,10 +22,6 @@ const limiter = rateLimit({
 
 app.use('/recommendation', limiter )
 
-const corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
 
 app.use(cors(corsOptions))
 // exxpress to json

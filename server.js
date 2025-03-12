@@ -12,6 +12,7 @@ const corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
+app.use(cors(corsOptions))
 
 const limiter = rateLimit({
 	windowMs: 24 * 60 * 60 * 1000, // 24 hours
@@ -23,7 +24,6 @@ const limiter = rateLimit({
 app.use('/recommendation', limiter )
 
 
-app.use(cors(corsOptions))
 // exxpress to json
 app.use(express.json())
 app.use("/", router)

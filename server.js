@@ -1,4 +1,5 @@
 const express = require('express');
+const rateLimit = require('express-rate-limit')
 const router = require('./routes/handler');
 const connectDb = require('./database/connectDB');
 const app = express();
@@ -6,6 +7,16 @@ const app = express();
 const cors = require('cors')
 
 const port = process.env.PORT || 1050;
+
+
+const limiter = rateLimit({
+	windowMs: 24 * 60 * 60 * 1000, // 24 hours
+	limit: 3, // limit to 3 request per users.: 
+    message: "You've used your daily request, try again after 24 hours "  // messae
+	
+})
+
+app.use('/recommendation', limiter )
 
 const corsOptions = {
     origin: '*',

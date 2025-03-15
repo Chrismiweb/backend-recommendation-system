@@ -2,6 +2,7 @@ const express = require('express');
 const rateLimit = require('express-rate-limit')
 const router = require('./routes/handler');
 const connectDb = require('./database/connectDB');
+const fileUpload = require('express-fileupload');
 const app = express();
 // const port = 1050;
 const cors = require('cors')
@@ -15,8 +16,8 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 const limiter = rateLimit({
-	windowMs: 24 * 60 * 60 * 1000, // 24 hours
-	limit: 3, // limit to 3 request per users.: 
+    windowMs: 24 * 60 * 60 * 1000, // 24 hours
+	limit: 10000, // limit to 3 request per users.: 
     message: "You've used your daily request, try again after 24 hours "  // messae
 	
 })
@@ -26,6 +27,7 @@ app.use('/recommendation', limiter )
 
 // exxpress to json
 app.use(express.json())
+app.use(fileUpload());
 app.use("/", router)
 
 app.get('/', (req, res)=>(

@@ -50,13 +50,13 @@ const recommendation = async (req, res) => {
         },
       };
 
-      prompt = "Analyze this result file and List 10 suitable courses and the Nigerian higher institution where they can be studied. No explanations, just list them.";
+      prompt = "Analyze this result file and List 10 suitable courses and the Nigerian higher institution where they can be studied. but after analyzing it highlight the subject you saw , then you recommend";
     } else {
       // If no file, use manual input
       prompt = `Based on these O'level results: 
         Subjects: ${JSON.stringify(subjects)}
         Grades: ${JSON.stringify(grades)}
-        List 10 suitable courses and the Nigerian higher institution where they can be studied. No explanations, just list them.`;
+        List 10 suitable courses and the Nigerian higher institution where they can be studied. No explanations, just list them. but after analyzing it highlight the subject you saw , then you recommend`;
     }
 
     // **AI Request**

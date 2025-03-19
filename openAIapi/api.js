@@ -13,11 +13,11 @@ const genAI = new GoogleGenerativeAI(apiKey);
 const recommendation = async (req, res) => {
   try {
     let sampleFile, uploadPath;
-    const { subjects, grades } = req.body;
+    const { subjects, grades, region } = req.body;
 
     // **Check if file or manual input is provided**
-    if (!req.files?.sampleFile && (!subjects || !grades)) {
-      return res.status(400).json({ error: "Provide either subjects & grades or upload a result file." });
+    if (!req.files?.sampleFile && (!subjects || !grades || !region)) {
+      return res.status(400).json({ error: "Provide either subjects & grades or upload a result file including the region" });
     }
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -55,8 +55,9 @@ const recommendation = async (req, res) => {
       // If no file, use manual input
       prompt = `Based on these O'level results: 
         Subjects: ${JSON.stringify(subjects)}
-        Grades: ${JSON.stringify(grades)}
-        List 10 suitable courses and the Nigerian higher institution where they can be studied. No explanations, just list them. but after analyzing it highlight the subject you saw , then you recommend`;
+        Grades: ${JSON.stringify(grades)} and this nigeria region:
+        Region: ${JSON.stringify(region)}
+        List 10 suitable courses and the Nigerian higher institution where they can be studied including the region inputed. No explanations, just list them. but after analyzing it highlight the subject you saw , then you recommend`;
     }
 
     // **AI Request**

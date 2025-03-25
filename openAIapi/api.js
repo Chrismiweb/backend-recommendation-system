@@ -16,7 +16,7 @@ const recommendation = async (req, res) => {
     const { subjects, grades, region } = req.body;
 
     // **Check if file or manual input is provided**
-    if (!req.files?.sampleFile && (!subjects || !grades || !region)) {
+    if (!req.files?.sampleFile && (!subjects || !grades )) {
       return res.status(400).json({ error: "Provide either subjects & grades or upload a result file including the region" });
     }
 
@@ -50,14 +50,14 @@ const recommendation = async (req, res) => {
         },
       };
 
-      prompt = "Analyze this result file and List 10 suitable courses and the Nigerian higher institution where they can be studied. but after analyzing it highlight the subject you saw , then you recommend";
+      prompt = "Analyze this result file based on the selected region and list 10 suitable courses along with Nigerian higher institutions where they can be studied.";
     } else {
       // If no file, use manual input
       prompt = `Based on these O'level results: 
         Subjects: ${JSON.stringify(subjects)}
         Grades: ${JSON.stringify(grades)} and this nigeria region:
         Region: ${JSON.stringify(region)}
-        List 10 suitable courses and the Nigerian higher institution where they can be studied including the region inputed. No explanations, just list them. but after analyzing it highlight the subject you saw , then you recommend`;
+        Generate a list of 10 suitable courses along with Nigerian higher institutions where they can be studied, based on the selected region. `;
     }
 
     // **AI Request**

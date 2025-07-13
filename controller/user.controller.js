@@ -45,7 +45,6 @@ const registerUser = async (req, res) => {
   } catch (error) {
     console.error("Error registering user:", error);
 
-  
   }
 };
 
@@ -74,8 +73,6 @@ const loginUser = async(req, res)=>{
       token
     })
 
-
-    
 }
 
 

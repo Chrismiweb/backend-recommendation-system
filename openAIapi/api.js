@@ -169,7 +169,7 @@ Grades: ${JSON.stringify(parsedGrades)}
 ${JSON.stringify(parsedQuestionnaire, null, 2)}
 
 Using 50% academic performance and 50% user interests, recommend atleast 13 suitable career paths or university courses.
-For each, suggest a Nigerian university and give a short explanation.`;
+For each, suggest a Nigerian university and give a short explanation. also make it a personalized response when giving out recommendations`;
     }
 
     // Gemini AI request
